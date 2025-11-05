@@ -37,7 +37,7 @@ gsutil -m rsync -r \
 ```bash
 sudo apt update
 sudo apt install apt-utils build-essential python3-dev python3-pip python3-pip-whl \
-  libcairo2-dev libgirepository1.0-dev pkg-config libdbus-1-dev
+  libcairo2-dev libgirepository1.0-dev pkg-config libdbus-1-dev parallel
 ```
 
 ### Prepare environment for `DeepSomatic` using `run-prereq.sh`
