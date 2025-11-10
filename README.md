@@ -58,7 +58,7 @@ bash run-prereq.sh
 bash dv_tf/run-prereq.sh
 ```
 
-### Install `DeepSomatic` requirements in `/usr/bin/python3`
+### Install `DeepSomatic` requirements in `/usr/bin/python3` or specified `python 3.10`
 
 ```bash
 /usr/bin/python3 -m pip install -r requirements.txt --no-deps -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
@@ -80,6 +80,9 @@ cp /path/to/run_deepsomatic.py /opt/deepvariant/bin/deepsomatic/
 
 # copy prebuilt binaries to /opt/deepvariant/bin
 rsync -avP /path/to/deepvariant/binaries /opt/deepvariant/bin/
+# if use customized python3 other than /usr/bin/python3, patch the binaries
+# modify the BIN_DIR and PYTHON when needed
+bash patch/patch_dv_stub.sh
 
 # copy deepsomatic models to /opt/models/deepsomatic
 mkdir -p /opt/models/deepsomatic
@@ -96,6 +99,12 @@ mkdir -p /opt/deepvariant/bin/deepsomatic/
 
 # copy locally shared run_deepsomatic.py
 cp /t9k/mnt/WorkSpace/data/ngs/xuzhenyu/dv/deepvariant/scripts/run_deepsomatic.py /opt/deepvariant/bin/deepsomatic/
+
+# copy prebuilt binaries to /opt/deepvariant/bin
+rsync -avP /t9k/mnt/WorkSpace/data/ngs/xuzhenyu/dv/DeepVariant-1.9.0/ /opt/deepvariant/bin/
+# if use customized python3 other than /usr/bin/python3, patch the binaries
+# modify the BIN_DIR and PYTHON when needed
+bash patch/patch_dv_stub.sh
 
 # copy deepsomatic models to /opt/models/deepsomatic
 # remember to modify SRC_BASE path to /t9k/mnt/WorkSpace/data/ngs/xuzhenyu/dv/models/deepsomatic/1.9.0/savedmodels
