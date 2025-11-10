@@ -18,6 +18,10 @@
 
 ```bash
 gsutil -m rsync -r "gs://deepvariant/binaries/DeepVariant/1.9.0/DeepVariant-1.9.0" .
+
+
+# local directory
+/t9k/mnt/WorkSpace/data/ngs/xuzhenyu/dv/DeepVariant-1.9.0
 ```
 
 ### Download DeepSomatic models
@@ -30,6 +34,10 @@ mkdir -p "${DEST}"
 gsutil -m rsync -r \
   "gs://deepvariant/models/DeepSomatic/1.9.0/" \
   "${DEST}"
+
+
+# local directory
+/t9k/mnt/WorkSpace/data/ngs/xuzhenyu/dv/models
 ```
 
 ### Prepare environment for `/usr/bin/python3` & `DeepSomatic` using `apt`
@@ -44,12 +52,20 @@ sudo apt install apt-utils build-essential python3-dev python3-pip python3-pip-w
 
 ```bash
 bash run-prereq.sh
+
+
+# local directory
+bash dv_tf/run-prereq.sh
 ```
 
 ### Install `DeepSomatic` requirements in `/usr/bin/python3`
 
 ```bash
 /usr/bin/python3 -m pip install -r requirements.txt --no-deps -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
+
+
+# or use whatever prepared python 3.10 you like
+micromamba run -n tf pip install -r requirements.txt --no-deps -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 ```
 
 ### Install `DeepSomatic` to `/opt`
@@ -72,6 +88,25 @@ bash rsync_install_deepsomatic_models.sh
 # generate command cli
 bash make_cli.sh
 ```
+
+#### Local shared directory
+
+```bash
+mkdir -p /opt/deepvariant/bin/deepsomatic/
+
+# copy locally shared run_deepsomatic.py
+cp /t9k/mnt/WorkSpace/data/ngs/xuzhenyu/dv/deepvariant/scripts/run_deepsomatic.py /opt/deepvariant/bin/deepsomatic/
+
+# copy deepsomatic models to /opt/models/deepsomatic
+# remember to modify SRC_BASE path to /t9k/mnt/WorkSpace/data/ngs/xuzhenyu/dv/models/deepsomatic/1.9.0/savedmodels
+mkdir -p /opt/models/deepsomatic
+bash rsync_install_deepsomatic_models.sh
+
+# generate command cli
+# remember to modify PYTHON variables and 
+bash make_cli.sh
+```
+
 
 ### `Tensorflow` CUDA issues
 
