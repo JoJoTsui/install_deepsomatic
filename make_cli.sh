@@ -7,15 +7,16 @@ set -euo pipefail
 # Define constants
 BASH_HEADER='#!/usr/bin/env bash'
 DEEPVARIANT_BIN="/opt/deepvariant/bin"
+PYTHON="${PYTHON:-micromamba run -n tf python3}"  # Override with env var to use a different Python interpreter
 
 # Array of wrapper configurations: "script_name|python_command"
 WRAPPERS=(
-  "make_examples_somatic|python3 -u ${DEEPVARIANT_BIN}/make_examples_somatic.zip"
-  "call_variants|python3 ${DEEPVARIANT_BIN}/call_variants.zip"
-  "postprocess_variants|python3 ${DEEPVARIANT_BIN}/postprocess_variants.zip"
-  "vcf_stats_report|python3 ${DEEPVARIANT_BIN}/vcf_stats_report.zip"
-  "show_examples|python3 ${DEEPVARIANT_BIN}/show_examples.zip"
-  "runtime_by_region_vis|python3 ${DEEPVARIANT_BIN}/runtime_by_region_vis.zip"
+  "make_examples_somatic|${PYTHON} -u ${DEEPVARIANT_BIN}/make_examples_somatic.zip"
+  "call_variants|${PYTHON} ${DEEPVARIANT_BIN}/call_variants.zip"
+  "postprocess_variants|${PYTHON} ${DEEPVARIANT_BIN}/postprocess_variants.zip"
+  "vcf_stats_report|${PYTHON} ${DEEPVARIANT_BIN}/vcf_stats_report.zip"
+  "show_examples|${PYTHON} ${DEEPVARIANT_BIN}/show_examples.zip"
+  "runtime_by_region_vis|${PYTHON} ${DEEPVARIANT_BIN}/runtime_by_region_vis.zip"
 )
 
 # Array to store created files for chmod
@@ -35,8 +36,9 @@ done
 
 # Create wrapper for the deepsomatic runner
 DEEPSOMATIC_WRAPPER="${DEEPVARIANT_BIN}/deepsomatic/run_deepsomatic"
-printf '%s\npython3 -u %s/deepsomatic/run_deepsomatic.py "$@"\n' \
+printf '%s\n%s -u %s/deepsomatic/run_deepsomatic.py "$@"\n' \
   "${BASH_HEADER}" \
+  "${PYTHON}" \
   "${DEEPVARIANT_BIN}" > "${DEEPSOMATIC_WRAPPER}"
 CREATED_FILES+=("${DEEPSOMATIC_WRAPPER}")
 echo "Created wrapper: deepsomatic/run_deepsomatic"
