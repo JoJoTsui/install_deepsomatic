@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
-import io
+# import io
+import shutil
 import re
 import tempfile
 import zipfile
@@ -23,7 +24,8 @@ def patch_stub(zip_path: Path, python_path: str):
                         raise RuntimeError("PYTHON_BINARY definition not found")
                     data = new_text.encode("utf-8")
                 zout.writestr(item, data)
-    Path(tmp.name).replace(zip_path)
+    # Path(tmp.name).replace(zip_path)
+    shutil.move(tmp.name, zip_path)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
