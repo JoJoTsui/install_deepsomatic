@@ -65,6 +65,7 @@ bash dv_tf/run-prereq.sh
 
 
 # or use whatever prepared python 3.10 you like
+micromamba create -n tf -c conda-forge -c nvidia tensorflow=2.13.1=cuda118py310h189a05f_1 python=3.10.12 cudatoolkit cudnn
 micromamba run -n tf pip install -r requirements.txt --no-deps -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 ```
 
