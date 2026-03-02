@@ -134,6 +134,12 @@ bash make_cli.sh
 
 WIP
 
+## INSTALL by `rsync` preconfigured binaries
+
+```bash
+sudo rsync -avP /t9k/mnt/joey/bio_utilities/deepvariant_opt/ /opt/
+```
+
 ## Test
 
 __https://github.com/google/deepsomatic/blob/r1.9/docs/deepsomatic-case-study-wes.md__
