@@ -117,6 +117,7 @@ mkdir -p /opt/models/deepsomatic
 bash rsync_install_deepsomatic_models.sh
 
 # generate command cli
+# remember to modify `PYTHON` variables
 bash make_cli.sh
 ```
 
@@ -131,16 +132,19 @@ cp /t9k/mnt/WorkSpace/data/ngs/xuzhenyu/dv/deepvariant/scripts/run_deepsomatic.p
 # copy prebuilt binaries to /opt/deepvariant/bin
 rsync -avP /t9k/mnt/WorkSpace/data/ngs/xuzhenyu/dv/DeepVariant-1.9.0/ /opt/deepvariant/bin/
 # if use customized python3 other than /usr/bin/python3, patch the binaries
-# modify the BIN_DIR and PYTHON when needed
+# modify the 
+# `BIN_DIR` and 
+# `PYTHON` when needed
 bash patch/patch_dv_stub.sh
 
 # copy deepsomatic models to /opt/models/deepsomatic
-# remember to modify SRC_BASE path to /t9k/mnt/WorkSpace/data/ngs/xuzhenyu/dv/models/deepsomatic/1.9.0/savedmodels
+# remember to modify `SRC_BASE` path to /t9k/mnt/WorkSpace/data/ngs/xuzhenyu/dv/models/deepsomatic/1.9.0/savedmodels
+# remember to modify `rsync -avPn` to `rsync -avP`
 mkdir -p /opt/models/deepsomatic
 bash rsync_install_deepsomatic_models.sh
 
 # generate command cli
-# remember to modify PYTHON variables and 
+# remember to modify `PYTHON` variables
 bash make_cli.sh
 ```
 
