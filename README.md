@@ -105,11 +105,15 @@ cp /path/to/run_deepsomatic.py /opt/deepvariant/bin/deepsomatic/
 # copy prebuilt binaries to /opt/deepvariant/bin
 rsync -avP /path/to/deepvariant/binaries /opt/deepvariant/bin/
 # if use customized python3 other than /usr/bin/python3, patch the binaries
-# modify the BIN_DIR and PYTHON when needed
-bash patch/patch_dv_stub.sh
+# modify the 
+# `BIN_DIR` and 
+# `PYTHON` when needed
+cd patch && bash patch_dv_stub.sh
 
 # copy deepsomatic models to /opt/models/deepsomatic
 mkdir -p /opt/models/deepsomatic
+# modify the `SRC_BASE` when needed
+# remember to modify `rsync -avPn` to `rsync -avP`
 bash rsync_install_deepsomatic_models.sh
 
 # generate command cli
