@@ -13,9 +13,9 @@
 3. Prepare environment for `/usr/bin/python3` & `DeepSomatic` using `apt`
 4. Prepare environment for `DeepSomatic` using `run-prereq.sh`
 
-  - Install `DeepSomatic` requirements in `/usr/bin/python3`
+    4.1 Install `DeepSomatic` requirements in `/usr/bin/python3`
 
-  - or Install `DeepSomatic` requirements using conda/micromamba virtual environment, e.g., `tf` virtual environment
+    4.2 or Install `DeepSomatic` requirements using conda/micromamba virtual environment, e.g., `tf` virtual environment
 
 5. Install `DeepSomatic` to `/opt`
 6. `Tensorflow` CUDA issues
