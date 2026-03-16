@@ -2,19 +2,26 @@
 
 ## Requirements
 - `ubuntu 22.04`
-- CPUs support SSE4 & AVX
-- sudo privilege
+- `python 3.10.12`
+- CPUs support `SSE4` & `AVX`
+- `sudo` privilege
 
 ## Install
 
 1. Download prebuilt DeepSomatic binaries
-1. Download DeepSomatic models
-1. Prepare environment for `/usr/bin/python3` & `DeepSomatic` using `apt`
-1. Prepare environment for `DeepSomatic` using `run-prereq.sh`
-1. Install `DeepSomatic` requirements in `/usr/bin/python3`
-1. `Tensorflow` CUDA issues
+2. Download DeepSomatic models
+3. Prepare environment for `/usr/bin/python3` & `DeepSomatic` using `apt`
+4. Prepare environment for `DeepSomatic` using `run-prereq.sh`
 
-### Download prebuilt DeepSomatic binaries
+  - Install `DeepSomatic` requirements in `/usr/bin/python3`
+
+  - or Install `DeepSomatic` requirements using conda/micromamba virtual environment, e.g., `tf` virtual environment
+
+5. Install `DeepSomatic` to `/opt`
+6. `Tensorflow` CUDA issues
+7. Backup the installed deepsomatic binaries & models
+
+### 1. Download prebuilt DeepSomatic binaries
 
 ```bash
 gsutil -m rsync -r "gs://deepvariant/binaries/DeepVariant/1.9.0/DeepVariant-1.9.0" .
@@ -24,7 +31,7 @@ gsutil -m rsync -r "gs://deepvariant/binaries/DeepVariant/1.9.0/DeepVariant-1.9.
 /t9k/mnt/WorkSpace/data/ngs/xuzhenyu/dv/DeepVariant-1.9.0
 ```
 
-### Download DeepSomatic models
+### 2. Download DeepSomatic models
 
 ```bash
 # deepsomatic models
@@ -40,7 +47,7 @@ gsutil -m rsync -r \
 /t9k/mnt/WorkSpace/data/ngs/xuzhenyu/dv/models
 ```
 
-### Prepare environment for `/usr/bin/python3` & `DeepSomatic` using `apt`
+### 3. Prepare environment for `/usr/bin/python3` & `DeepSomatic` using `apt`
 
 ```bash
 sudo apt update
@@ -48,7 +55,7 @@ sudo apt install apt-utils build-essential python3-dev python3-pip python3-pip-w
   libcairo2-dev libgirepository1.0-dev pkg-config libdbus-1-dev parallel
 ```
 
-### Prepare environment for `DeepSomatic` using `run-prereq.sh`
+### 4. Prepare environment for `DeepSomatic` using `run-prereq.sh`
 
 ```bash
 bash run-prereq.sh
@@ -58,12 +65,15 @@ bash run-prereq.sh
 bash dv_tf/run-prereq.sh
 ```
 
-### Install `DeepSomatic` requirements in `/usr/bin/python3` or specified `python 3.10`
+#### 4.1 Install `DeepSomatic` requirements in `/usr/bin/python3` or specified `python 3.10`
 
 ```bash
 /usr/bin/python3 -m pip install -r requirements.txt --no-deps -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
+```
 
+#### 4.2 Install `DeepSomatic` requirements using conda/micromamba virtual environment
 
+```bash
 # or use whatever prepared python 3.10 you like
 micromamba create -n tf -c conda-forge -c nvidia tensorflow=2.13.1=cuda118py310h189a05f_1 python=3.10.12 cudatoolkit cudnn
 micromamba run -n tf pip install -r requirements.txt --no-deps -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
@@ -81,7 +91,8 @@ PIP_USER=false micromamba run -n tf uv pip install -r requirements.txt --no-deps
 cat ~/.condarc
 ```
 
-### Install `DeepSomatic` to `/opt`
+
+### 5. Install `DeepSomatic` to `/opt`
 
 **Use `sudo` if needed**
 
@@ -130,9 +141,16 @@ bash make_cli.sh
 ```
 
 
-### `Tensorflow` CUDA issues
+### 6. `Tensorflow` CUDA issues
 
 WIP
+
+### 7. Backup the installed deepsomatic binaries & models
+
+- `/opt/deepvariant`
+- `/opt/models`
+- `/usr/bin/python3` environment
+- or conda/micromamba `python3` virtual environment
 
 ## INSTALL by `rsync` preconfigured binaries
 
