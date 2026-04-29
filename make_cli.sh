@@ -11,6 +11,7 @@ PYTHON="${PYTHON:-micromamba run -n tf python3}"  # Override with env var to use
 
 # Array of wrapper configurations: "script_name|python_command"
 WRAPPERS=(
+  "make_examples|${PYTHON} -u ${DEEPVARIANT_BIN}/make_examples.zip"
   "make_examples_somatic|${PYTHON} -u ${DEEPVARIANT_BIN}/make_examples_somatic.zip"
   "call_variants|${PYTHON} ${DEEPVARIANT_BIN}/call_variants.zip"
   "postprocess_variants|${PYTHON} ${DEEPVARIANT_BIN}/postprocess_variants.zip"
